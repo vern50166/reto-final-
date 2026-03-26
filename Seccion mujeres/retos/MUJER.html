@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tienda Ropa</title>
+</head>
+
+<body style="font-family: Arial, sans-serif; margin:0; background:#f5f5f5;">
+
+<header style="display:flex; align-items:center; justify-content:space-between; padding:15px 30px; background:white;">
+
+  <!-- IZQUIERDA (MENÚ) -->
+  <div style="position:relative;">
+    <button onclick="toggleMenu()" style="padding:8px; cursor:pointer;">☰</button>
+
+    <div id="menu" style="display:none; position:absolute; background:white; padding:10px; box-shadow:0 2px 5px rgba(0,0,0,0.2);">
+      <p onclick="mostrar('inicio')" style="cursor:pointer;">Inicio</p>
+      <p onclick="mostrar('productos')" style="cursor:pointer;">Productos</p>
+      <p onclick="mostrar('compras')" style="cursor:pointer;">Compras</p>
+      <p onclick="mostrar('acerca')" style="cursor:pointer;">Acerca de</p>
+      <p onclick="mostrar('contacto')" style="cursor:pointer;">Contacto</p>
+    </div>
+  </div>
+
+  <!-- CENTRO -->
+  <h1 style="font-size:20px; letter-spacing:2px; margin:0;">TIENDA</h1>
+
+  <!-- DERECHA -->
+  <div style="display:flex; align-items:center; gap:15px;">
+    
+    <nav>
+      <a href="#" style="margin-right:10px; text-decoration:none; color:black; font-size:14px;">HOMBRE</a>
+      <a href="#" style="margin-right:10px; text-decoration:none; color:black; font-size:14px;">MUJER</a>
+      <a href="#" style="margin-right:10px; text-decoration:none; color:black; font-size:14px;">ACCESORIOS</a>
+      <a href="#" style="margin-right:10px; text-decoration:none; color:black; font-size:14px;">TIENDAS</a>
+      <a href="#" style="color:green; text-decoration:none;">SALE</a>
+    </nav>
+
+    <div>
+      <span style="margin-left:10px; cursor:pointer;">👤</span>
+      <span style="margin-left:10px; cursor:pointer;">🔍</span>
+      <span style="margin-left:10px; cursor:pointer;">🛒</span>
+    </div>
+
+  </div>
+
+</header>
+
+<nav style="display:flex; justify-content:center; padding:10px; background:#eee;">
+  <a href="#" style="margin:0 10px; text-decoration:none; color:black;">CAMISETAS</a>
+  <a href="#" style="margin:0 10px; text-decoration:none; color:black;">JEANS</a>
+  <a href="#" style="margin:0 10px; text-decoration:none; color:black;">BUZOS</a>
+  <a href="#" style="margin:0 10px; text-decoration:none; color:black;">SHORTS</a>
+  <a href="#" style="margin:0 10px; text-decoration:none; color:black;">TOPS</a>
+</nav>
+
+<section style="text-align:center; margin:20px;">
+  <button onclick="filtrar('all')" style="margin:5px; padding:8px 12px; border:none; background:black; color:white; cursor:pointer;">Todos</button>
+  <button onclick="filtrar('basicos')" style="margin:5px; padding:8px 12px; border:none; background:black; color:white; cursor:pointer;">Básicos</button>
+  <button onclick="filtrar('denim')" style="margin:5px; padding:8px 12px; border:none; background:black; color:white; cursor:pointer;">Denim</button>
+</section>
+
+<section id="productos" style="display:grid; grid-template-columns:repeat(4,1fr); gap:20px; padding:20px;">
+
+  <div class="product basicos" style="background:white; padding:10px; text-align:center;">
+    <img src="img/2.jfif" style="width:100%;">
+    <p>Blusa de tirantes</p>
+  </div>
+
+  <div class="product accesorios" style="background:white; padding:10px; text-align:center;">
+    <img src="img/20.jfif" style="width:100%;">
+    <p>Cartera</p>
+  </div>
+
+  <div class="product basicos" style="background:white; padding:10px; text-align:center;">
+    <img src="img/23.jfif" style="width:100%;">
+    <p>Esquele negro</p>
+  </div>
+
+  <div class="product denim" style="background:white; padding:10px; text-align:center;">
+    <img src="img/26.jfif" style="width:100%;">
+    <p>Jean de cruces</p>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#132215; color:white; padding:50px 40px;">
+
+  <div style="display:grid; grid-template-columns:repeat(3,1fr);">
+
+    <div>
+      <h3 style="margin-bottom:15px;">SOBRE LA MARCA</h3>
+      <p style="margin-bottom:8px;">Sobre nosotros</p>
+      <p style="margin-bottom:8px;">Cultura</p>
+      <p style="margin-bottom:8px;">Trabaja aquí</p>
+    </div>
+
+    <div>
+      <h3 style="margin-bottom:15px;">AYUDA</h3>
+      <p style="margin-bottom:8px;">Cambios y devoluciones</p>
+      <p style="margin-bottom:8px;">Términos y condiciones</p>
+      <p style="margin-bottom:8px;">Envíos</p>
+    </div>
+
+    <div>
+      <h3 style="margin-bottom:15px;">CONTACTO</h3>
+      <p style="margin-bottom:8px;">Medellín, Colombia</p>
+      <p style="margin-bottom:8px;">WhatsApp: 300 507 10 00</p>
+      <p style="margin-bottom:8px;">info@BlackNoise.net</p>
+    </div>
+
+  </div>
+
+  <div style="margin-top:30px; text-align:center; font-size:12px; opacity:0.7;">
+    Política de privacidad | Superintendencia
+  </div>
+
+</footer>
+
+<script>
+function filtrar(categoria) {
+  let productos = document.querySelectorAll('.product');
+
+  productos.forEach(producto => {
+    if (categoria === 'all') {
+      producto.style.display = 'block';
+    } else {
+      if (producto.classList.contains(categoria)) {
+        producto.style.display = 'block';
+      } else {
+        producto.style.display = 'none';
+      }
+    }
+  });
+}
+</script>
+
+</body>
+</html>

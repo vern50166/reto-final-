@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Tienda Ropa</title>
+</head>
+
+<body style="font-family: Arial; margin:0; background:#f5f5f5;">
+
+<!-- HEADER -->
+<header style="display:flex; justify-content:space-between; padding:15px; background:white;">
+
+  <!-- MENÚ DESPLEGABLE -->
+  <div style="position:relative;">
+    <button onclick="toggleMenu()" style="padding:8px;">☰ Menú</button>
+    <div id="menu" style="display:none; position:absolute; background:white; padding:10px;">
+      <p onclick="mostrar('inicio')">Inicio</p>
+      <p onclick="mostrar('productos')">Productos</p>
+      <p onclick="mostrar('compras')">Compras</p>
+      <p onclick="mostrar('acerca')">Acerca de</p>
+      <p onclick="mostrar('contacto')">Contacto</p>
+    </div>
+  </div>
+
+  <h2>TIENDA</h2>
+
+  <div>
+    🛒 <span id="contador">0</span>
+  </div>
+
+</header>
+
+<!-- CONTADOR DE VISITAS -->
+<p style="text-align:center;">Visitas: <span id="visitas"></span></p>
+
+<!-- INICIO -->
+<section id="inicio">
+  <h2 style="text-align:center;">Bienvenido a la tienda</h2>
+</section>
+
+<!-- PRODUCTOS -->
+<section id="productos" style="display:none;">
+  
+<div style="display:grid; grid-template-columns:repeat(4,1fr); gap:20px; padding:20px;">
+
+  <div style="background:white; padding:10px; text-align:center;">
+    <img src="img/2.jfif" style="width:100%;">
+    <p>Blusa</p>
+    <p>$45.000</p>
+    <button onclick="agregar('Blusa',45000)">Comprar</button>
+  </div>
+
+  <div style="background:white; padding:10px; text-align:center;">
+    <img src="img/20.jfif" style="width:100%;">
+    <p>Cartera</p>
+    <p>$60.000</p>
+    <button onclick="agregar('Cartera',60000)">Comprar</button>
+  </div>
+
+</div>
+
+</section>
+
+<!-- CARRITO -->
+<section id="compras" style="display:none;">
+  <h2>Carrito</h2>
+  <ul id="carrito"></ul>
+  <h3>Total: $<span id="total">0</span></h3>
+</section>
+
+<!-- ACERCA -->
+<section id="acerca" style="display:none;">
+  <h2>Sobre nosotros</h2>
+  <p>Somos una tienda moderna.</p>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" style="display:none;">
+  <h2>Contacto</h2>
+  <p>WhatsApp: 3005071000</p>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#132215; color:white; padding:30px; margin-top:20px;">
+  <p style="text-align:center;">© Tienda</p>
+</footer>
+
+<script>
+
+// MENÚ
+function toggleMenu(){
+  let menu = document.getElementById("menu");
+  menu.style.display = menu.style.display === "none" ? "block" : "none";
+}
+
+// CAMBIO DE PÁGINAS
+function mostrar(seccion){
+  let secciones = ["inicio","productos","compras","acerca","contacto"];
+  secciones.forEach(s=>{
+    document.getElementById(s).style.display="none";
+  });
+  document.getElementById(seccion).style.display="block";
+}
+
+// CARRITO
+let carrito = [];
+let total = 0;
+
+function agregar(nombre, precio){
+  carrito.push({nombre, precio});
+  total += precio;
+
+  document.getElementById("contador").innerText = carrito.length;
+  actualizarCarrito();
+}
+
+function actualizarCarrito(){
+  let lista = document.getElementById("carrito");
+  lista.innerHTML = "";
+
+  carrito.forEach(p=>{
+    let li = document.createElement("li");
+    li.textContent = p.nombre + " - $" + p.precio;
+    lista.appendChild(li);
+  });
+
+  document.getElementById("total").innerText = total;
+}
+
+// CONTADOR DE VISITAS
+let visitas = localStorage.getItem("visitas") || 0;
+visitas++;
+localStorage.setItem("visitas", visitas);
+document.getElementById("visitas").innerText = visitas;
+
+</script>
+
+</body>
+</html>
